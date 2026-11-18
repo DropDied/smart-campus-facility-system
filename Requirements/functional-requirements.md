@@ -21,7 +21,7 @@ Priority uses MoSCoW: Must / Should / Could / Won't
 | FR-09 | The system shall allow campus users to check a facility's availability for a selected date and time. | Campus User | Must |
 | FR-10 | The system shall allow campus users to submit a booking request for an available time slot. | Campus User | Must |
 | FR-11 | The system shall prevent bookings for time slots that are already booked or for facilities marked unavailable. | Campus User | Must |
-| FR-12 | The system shall allow campus users to view their own bookings and each booking's status (Pending, Approved, Rejected, Cancelled). | Campus User | Must |
+| FR-12 | The system shall allow campus users to view their own bookings and each booking's status (Pending, Confirmed, Rejected, Cancelled). | Campus User | Must |
 | FR-13 | The system shall allow campus users to edit their own booking before the booking date. | Campus User | Should |
 | FR-14 | The system shall allow campus users to cancel their own booking. | Campus User | Must |
 | FR-15 | The system shall allow administrators to approve or reject booking requests. | Administrator | Must |
@@ -41,4 +41,4 @@ Priority uses MoSCoW: Must / Should / Could / Won't
 | FR-25 | The system shall allow administrators to assign an accepted report to maintenance personnel as a task. | Administrator | Must |
 | FR-26 | The system shall allow administrators to track the progress of all maintenance tasks. | Administrator | Must |
 | FR-27 | The system shall allow maintenance personnel to view tasks assigned to them, including the report details. | Maintenance Personnel | Must |
-| FR-28 | The system shall allow maintenance personnel to update a task's status (In Progress, Completed). | Maintenance Personnel | Must |
+| FR-28 | The system shall allow maintenance personnel to update a task's status (In Progress, Resolved). | Maintenance Personnel | Must |

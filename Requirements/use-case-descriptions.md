@@ -2,8 +2,8 @@
 
 Actors: User (parent of all actors), Campus User (parent of Student and Staff), Campus Administrator, Maintenance Personnel
 
-Booking statuses: Pending, Approved, Rejected, Cancelled
-Report statuses: Submitted, Accepted, Rejected, Assigned, In Progress, Completed
+Booking statuses: Pending, Confirmed, Rejected, Cancelled
+Report statuses: Pending, Accepted, Rejected, Assigned, In Progress, Resolved
 
 ---
 
@@ -74,7 +74,7 @@ Report statuses: Submitted, Accepted, Rejected, Assigned, In Progress, Completed
 | Actor(s) | Campus User (Student, Staff) |
 | Description | A campus user views their own bookings and their status, and edits or cancels a booking. |
 | Preconditions | The user is signed in. |
-| Main flow | 1. User selects My Bookings.<br>2. System displays the user's bookings with their status (Pending, Approved, Rejected, Cancelled).<br>3. User selects a booking and chooses Edit.<br>4. User changes the date or time slot.<br>5. System checks the new slot's availability and saves the change.<br>6. System sets the booking status to Pending for re-approval and displays a confirmation. |
+| Main flow | 1. User selects My Bookings.<br>2. System displays the user's bookings with their status (Pending, Confirmed, Rejected, Cancelled).<br>3. User selects a booking and chooses Edit.<br>4. User changes the date or time slot.<br>5. System checks the new slot's availability and saves the change.<br>6. System sets the booking status to Pending for re-approval and displays a confirmation. |
 | Alternative flows | 3a. User chooses Cancel: system asks for confirmation, sets the status to Cancelled and frees the time slot.<br>3b. The booking date has passed: system does not allow editing.<br>5a. The new slot is unavailable: system displays an error and the original booking remains unchanged. |
 | Postconditions | The booking is updated or cancelled. |
 | Related requirements | FR-12, FR-13, FR-14, NFR-04 |
@@ -86,7 +86,7 @@ Report statuses: Submitted, Accepted, Rejected, Assigned, In Progress, Completed
 | Actor(s) | Campus Administrator |
 | Description | An administrator approves or rejects pending booking requests. |
 | Preconditions | The administrator is signed in and at least one booking is Pending. |
-| Main flow | 1. Administrator selects Booking Requests.<br>2. System displays all bookings with status Pending.<br>3. Administrator selects a request and reviews its details.<br>4. Administrator selects Approve.<br>5. System sets the status to Approved. |
+| Main flow | 1. Administrator selects Booking Requests.<br>2. System displays all bookings with status Pending.<br>3. Administrator selects a request and reviews its details.<br>4. Administrator selects Approve.<br>5. System sets the status to Confirmed. |
 | Alternative flows | 4a. Administrator selects Reject: system sets the status to Rejected and frees the time slot. |
 | Postconditions | The booking status is updated and visible to the requesting user. |
 | Related requirements | FR-15 |
@@ -110,7 +110,7 @@ Report statuses: Submitted, Accepted, Rejected, Assigned, In Progress, Completed
 |---|---|
 | Actor(s) | Campus Administrator |
 | Description | Extends UC-08. While viewing a booking, an administrator cancels it, for example when a facility is closed. |
-| Preconditions | The administrator is viewing an Approved or Pending booking in UC-08. |
+| Preconditions | The administrator is viewing an Confirmed or Pending booking in UC-08. |
 | Main flow | 1. Administrator selects Cancel Booking.<br>2. System asks for confirmation.<br>3. Administrator confirms.<br>4. System sets the booking status to Cancelled and frees the time slot. |
 | Alternative flows | 3a. Administrator does not confirm: the booking remains unchanged. |
 | Postconditions | The booking is cancelled and the user sees the Cancelled status in My Bookings. |
@@ -135,10 +135,10 @@ Report statuses: Submitted, Accepted, Rejected, Assigned, In Progress, Completed
 | Actor(s) | Campus User (Student, Staff) |
 | Description | A campus user reports damaged facilities or equipment. |
 | Preconditions | The user is signed in. |
-| Main flow | 1. User selects Report Damage.<br>2. User selects the affected facility.<br>3. User describes the problem.<br>4. User submits the report.<br>5. System saves the report with status Submitted.<br>6. System displays a confirmation. |
+| Main flow | 1. User selects Report Damage.<br>2. User selects the affected facility.<br>3. User describes the problem.<br>4. User submits the report.<br>5. System saves the report with status Pending.<br>6. System displays a confirmation. |
 | Alternative flows | 4a. The description is empty: system displays an error message. |
 | Extension points | Attach photo (UC-12), after step 3 |
-| Postconditions | A report with status Submitted is stored for administrator review. |
+| Postconditions | A report with status Pending is stored for administrator review. |
 | Related requirements | FR-21, NFR-10 |
 
 ## UC-12 Attach photo
@@ -160,7 +160,7 @@ Report statuses: Submitted, Accepted, Rejected, Assigned, In Progress, Completed
 | Actor(s) | Campus User (Student, Staff) |
 | Description | A campus user tracks the progress of damage reports they submitted. |
 | Preconditions | The user is signed in. |
-| Main flow | 1. User selects My Reports.<br>2. System displays the reports submitted by this user, with their status (Submitted, Accepted, Rejected, Assigned, In Progress, Completed).<br>3. User selects a report to view its details. |
+| Main flow | 1. User selects My Reports.<br>2. System displays the reports submitted by this user, with their status (Pending, Accepted, Rejected, Assigned, In Progress, Resolved).<br>3. User selects a report to view its details. |
 | Alternative flows | 2a. The user has not submitted any reports: system displays a "no reports" message. |
 | Postconditions | None. |
 | Related requirements | FR-23, NFR-04 |
@@ -171,8 +171,8 @@ Report statuses: Submitted, Accepted, Rejected, Assigned, In Progress, Completed
 |---|---|
 | Actor(s) | Campus Administrator |
 | Description | An administrator reviews new damage reports and accepts or rejects them. |
-| Preconditions | The administrator is signed in and at least one report is Submitted. |
-| Main flow | 1. Administrator selects Damage Reports.<br>2. System displays reports with status Submitted.<br>3. Administrator selects a report and reviews its details.<br>4. Administrator selects Accept.<br>5. System sets the report status to Accepted. |
+| Preconditions | The administrator is signed in and at least one report is Pending. |
+| Main flow | 1. Administrator selects Damage Reports.<br>2. System displays reports with status Pending.<br>3. Administrator selects a report and reviews its details.<br>4. Administrator selects Accept.<br>5. System sets the report status to Accepted. |
 | Alternative flows | 4a. The report is invalid or a duplicate: administrator selects Reject and the system sets the status to Rejected. |
 | Postconditions | The report is Accepted and ready to assign, or Rejected. |
 | Related requirements | FR-24 |
@@ -220,7 +220,7 @@ Report statuses: Submitted, Accepted, Rejected, Assigned, In Progress, Completed
 | Actor(s) | Maintenance Personnel |
 | Description | A maintenance staff member updates the progress of an assigned task. |
 | Preconditions | The staff member is viewing one of their assigned tasks. |
-| Main flow | 1. Staff member selects Update Status.<br>2. Staff member selects In Progress or Completed.<br>3. System saves the new status.<br>4. System updates the related report's status so the reporting user and administrator can see it. |
-| Alternative flows | 2a. The task is already Completed: system does not allow further status changes. |
+| Main flow | 1. Staff member selects Update Status.<br>2. Staff member selects In Progress or Resolved.<br>3. System saves the new status.<br>4. System updates the related report's status so the reporting user and administrator can see it. |
+| Alternative flows | 2a. The task is already Resolved: system does not allow further status changes. |
 | Postconditions | The task and report statuses are updated. |
 | Related requirements | FR-28 |
